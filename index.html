@@ -1,1 +1,849 @@
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trần Anh Khoa - Executive Portfolio & CV Online</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#1E293B',
+                            900: '#0F172A',
+                            950: '#080D1A',
+                        },
+                        gold: {
+                            400: '#FBBF24',
+                            500: '#F59E0B',
+                            600: '#D97706',
+                        },
+                        accent: {
+                            blue: '#2563EB',
+                            cyan: '#06B6D4'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #080D1A;
+            color: #E2E8F0;
+        }
+
+        /* Phone Frame Simulation */
+        .mobile-simulator-container {
+            width: 390px;
+            height: 812px;
+            border: 12px solid #1E293B;
+            border-radius: 48px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            position: relative;
+            margin: 2rem auto;
+            background: #0F172A;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-simulator-container .island-bar {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 28px;
+            background: #000;
+            border-radius: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 10px;
+        }
+
+        .mobile-simulator-container .inner-scroll {
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 40px;
+            scroll-behavior: smooth;
+        }
+
+        /* Laptop Container Simulation */
+        .desktop-simulator-container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            background: #0F172A;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F172A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D97706;
+        }
+
+        /* Print Styling */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .bg-navy-900, .bg-navy-950, .bg-navy-800 { background: white !important; color: black !important; border-color: #e2e8f0 !important; }
+            .text-white, .text-slate-200, .text-slate-300 { color: #1e293b !important; }
+            .text-gold-400, .text-gold-500 { color: #d97706 !important; }
+            .mobile-simulator-container, .desktop-simulator-container {
+                width: 100% !important;
+                height: auto !important;
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+            }
+            .inner-scroll { padding-top: 0 !important; overflow: visible !important; }
+            .print-border { border: 1px solid #cbd5e1 !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-gold-500 selection:text-navy-950">
+
+    <!-- Top Floating Toolbar -->
+    <header class="sticky top-0 z-50 bg-navy-900/90 backdrop-blur-md border-b border-slate-800 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            
+            <!-- Brand -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-gold-600 to-gold-400 text-navy-950 font-black text-lg flex items-center justify-center shadow-lg shadow-gold-500/20">
+                    TAK
+                </div>
+                <div>
+                    <h1 class="text-base font-bold text-white leading-tight">Trần Anh Khoa</h1>
+                    <p class="text-xs text-gold-400 font-medium">Executive Online Portfolio</p>
+                </div>
+            </div>
+
+            <!-- View Mode Switcher -->
+            <div class="hidden md:flex items-center bg-navy-950 p-1 rounded-xl border border-slate-800 text-xs font-semibold">
+                <button onclick="setViewMode('auto')" id="btn-view-auto" class="px-3 py-1.5 rounded-lg text-white bg-navy-800 transition-all flex items-center gap-1.5 shadow">
+                    <i class="fa-solid fa-expand text-gold-400"></i>
+                    <span>Tự động (Responsive)</span>
+                </button>
+                <button onclick="setViewMode('desktop')" id="btn-view-desktop" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-laptop"></i>
+                    <span>Giao diện Laptop</span>
+                </button>
+                <button onclick="setViewMode('mobile')" id="btn-view-mobile" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <span>Giao diện iPhone 15 Pro</span>
+                </button>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-2">
+                <button onclick="window.print()" class="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-navy-950 font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-2 transition-all shadow-md shadow-gold-500/10">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span class="hidden sm:inline">Xuất PDF / In CV</span>
+                </button>
+                <button onclick="openContactModal()" class="bg-navy-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-paper-plane text-gold-400"></i>
+                    <span class="hidden sm:inline">Liên hệ</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Viewport Simulator Outer Frame Wrapper -->
+    <div id="viewport-wrapper" class="w-full flex-grow flex items-center justify-center py-4 sm:py-8 px-2 sm:px-4">
+        
+        <!-- Main Container -->
+        <div id="app-container" class="w-full max-w-6xl transition-all duration-300">
+            <div id="inner-scroll-target" class="w-full bg-navy-900 border border-slate-800/80 rounded-3xl overflow-hidden shadow-2xl relative">
+                
+                <!-- Dynamic Island (For Mobile Mode simulation) -->
+                <div id="dynamic-island" class="island-bar hidden">
+                    <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mr-1"></div>
+                    <div class="w-2 h-2 rounded-full bg-gold-400"></div>
+                </div>
+
+                <!-- Hero Banner Header -->
+                <section class="relative bg-gradient-to-b from-navy-800/80 via-navy-900 to-navy-900 p-6 sm:p-10 border-b border-slate-800">
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                    
+                    <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8 relative z-10">
+                        
+                        <!-- Avatar with Status Glow -->
+                        <div class="relative flex-shrink-0 group">
+                            <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border-2 border-gold-500/40 p-1 bg-navy-950 shadow-2xl shadow-gold-500/10">
+                                <img src="input_file_0.png" alt="Trần Anh Khoa" class="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <span class="absolute -bottom-2 -right-2 bg-emerald-500 text-navy-950 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full border-2 border-navy-900 shadow flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                                Sẵn sàng nhận việc
+                            </span>
+                        </div>
+
+                        <!-- Name & Executive Title -->
+                        <div class="flex-1 text-center lg:text-left space-y-4">
+                            <div>
+                                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-gold-500/10 text-gold-400 border border-gold-500/20 mb-3">
+                                    <i class="fa-solid fa-award"></i>
+                                    <span>Cử nhân Quản Trị Kinh Doanh</span>
+                                </div>
+                                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+                                    Trần Anh Khoa
+                                </h1>
+                                <p class="text-base sm:text-lg text-slate-300 font-medium mt-2 leading-snug">
+                                    Chuyên Viên Quản Trị Kinh Doanh | Chăm Sóc Khách Hàng (CX) & Giám Sát Vận Hành
+                                </p>
+                            </div>
+
+                            <!-- Career Objective Pill Box -->
+                            <div class="bg-navy-950/70 p-4 rounded-2xl border border-slate-800 text-sm text-slate-300 leading-relaxed text-left">
+                                <div class="text-xs font-bold uppercase tracking-wider text-gold-400 mb-1 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-bullseye"></i> Mục Tiêu Nghề Nghiệp Executive
+                                </div>
+                                Tốt nghiệp ngành <strong class="text-white">Quản trị Kinh doanh - ĐH Kinh tế Huế</strong>. Tận dụng tư duy quản trị, kỹ năng đàm phán và kinh nghiệm thực chiến trong lĩnh vực Sales & CSKH để tối ưu hóa quy trình vận hành. Đặt mục tiêu phát triển bền vững lên vị trí <strong class="text-gold-400">Quản Lý Vận Hành / Trưởng Nhóm CX trong vòng 1 năm tới</strong>.
+                            </div>
+
+                            <!-- Quick Badges Contact Row -->
+                            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1 text-xs text-slate-300">
+                                <a href="tel:0899805070" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-navy-800 hover:bg-slate-800 border border-slate-700 transition-colors">
+                                    <i class="fa-solid fa-phone text-gold-400"></i>
+                                    <span>0899805070 - 0899997783</span>
+                                </a>
+                                <a href="mailto:anhkhoa1509@gmail.com" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-navy-800 hover:bg-slate-800 border border-slate-700 transition-colors">
+                                    <i class="fa-solid fa-envelope text-gold-400"></i>
+                                    <span>anhkhoa1509@gmail.com</span>
+                                </a>
+                                <span class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-navy-800 border border-slate-700">
+                                    <i class="fa-solid fa-location-dot text-gold-400"></i>
+                                    <span>Điện Biên Phủ, P. Thuận Hòa, TP. Huế</span>
+                                </span>
+                                <span class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-navy-800 border border-slate-700">
+                                    <i class="fa-solid fa-cake-candles text-gold-400"></i>
+                                    <span>15/09/2002</span>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Section Filter Tabs & Search Bar -->
+                <div class="sticky top-0 z-30 bg-navy-950/90 backdrop-blur border-b border-slate-800 px-6 py-3 no-print">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-3">
+                        
+                        <!-- Tabs -->
+                        <div class="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 text-xs font-semibold">
+                            <button onclick="filterCategory('all')" id="tab-all" class="tab-btn px-3.5 py-2 rounded-xl bg-gold-500 text-navy-950 font-bold transition-all whitespace-nowrap">
+                                Tất cả
+                            </button>
+                            <button onclick="filterCategory('experience')" id="tab-experience" class="tab-btn px-3.5 py-2 rounded-xl bg-navy-800 text-slate-300 hover:bg-slate-700 transition-all whitespace-nowrap">
+                                Kinh nghiệm (6)
+                            </button>
+                            <button onclick="filterCategory('education')" id="tab-education" class="tab-btn px-3.5 py-2 rounded-xl bg-navy-800 text-slate-300 hover:bg-slate-700 transition-all whitespace-nowrap">
+                                Học vấn & Chứng chỉ
+                            </button>
+                            <button onclick="filterCategory('skills')" id="tab-skills" class="tab-btn px-3.5 py-2 rounded-xl bg-navy-800 text-slate-300 hover:bg-slate-700 transition-all whitespace-nowrap">
+                                Kỹ năng
+                            </button>
+                            <button onclick="filterCategory('achievements')" id="tab-achievements" class="tab-btn px-3.5 py-2 rounded-xl bg-navy-800 text-slate-300 hover:bg-slate-700 transition-all whitespace-nowrap">
+                                Giải thưởng
+                            </button>
+                        </div>
+
+                        <!-- Keyword Search Input -->
+                        <div class="relative w-full md:w-64">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-400"></i>
+                            <input type="text" id="cv-search" onkeyup="searchCV()" placeholder="Tìm theo từ khóa (Viettel, MB, CSKT...)..." class="w-full bg-navy-900 border border-slate-700 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 transition-colors">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Main Body Content Grid -->
+                <div class="p-6 sm:p-8 space-y-10">
+
+                    <!-- SECTION 1: WORK EXPERIENCE -->
+                    <section id="sec-experience" class="cv-section space-y-6">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <h2 class="text-xl font-bold text-white flex items-center gap-2.5">
+                                <i class="fa-solid fa-briefcase text-gold-400"></i>
+                                <span>Kinh Nghiệm Làm Việc Chi Tiết</span>
+                            </h2>
+                            <span class="text-xs text-slate-400 font-medium hidden sm:inline">6 Vị trí làm việc thực chiến</span>
+                        </div>
+
+                        <div class="space-y-6 relative border-l-2 border-slate-800 ml-3 sm:ml-4 pl-4 sm:pl-6">
+
+                            <!-- Exp Item 1 -->
+                            <div class="searchable-item relative group print-border rounded-2xl bg-navy-950/60 p-5 border border-slate-800 hover:border-gold-500/40 transition-all">
+                                <span class="absolute -left-[25px] sm:-left-[33px] top-6 w-4 h-4 rounded-full bg-gold-500 border-4 border-navy-900 shadow"></span>
+                                
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                                    <h3 class="text-base font-bold text-white group-hover:text-gold-400 transition-colors">
+                                        Nhân viên Hành chính Tổng hợp
+                                    </h3>
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 w-fit">
+                                        06/2026 - Hiện tại
+                                    </span>
+                                </div>
+                                <p class="text-xs font-semibold text-gold-400 mb-3">Trung tâm Dịch vụ sự nghiệp công phường An Cựu</p>
+                                
+                                <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Thực hiện công tác hành chính, văn thư, lưu trữ và quản lý hồ sơ nghiệp vụ ngăn nắp, chính xác.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Soạn thảo văn bản hành chính, báo cáo định kỳ, kế hoạch công tác và tờ trình cấp trên.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Tổng hợp, theo dõi và đôn đốc hoàn thành các nhiệm vụ trọng tâm được ban giám đốc giao.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Phối hợp linh hoạt với các bộ phận chức năng để xử lý công việc và tiếp nhận phản ánh của nhân dân.</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Exp Item 2 -->
+                            <div class="searchable-item relative group print-border rounded-2xl bg-navy-950/60 p-5 border border-slate-800 hover:border-gold-500/40 transition-all">
+                                <span class="absolute -left-[25px] sm:-left-[33px] top-6 w-4 h-4 rounded-full bg-slate-600 border-4 border-navy-900"></span>
+                                
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                                    <h3 class="text-base font-bold text-white group-hover:text-gold-400 transition-colors">
+                                        Nhân viên văn phòng / Giám sát Vận tải
+                                    </h3>
+                                    <span class="text-xs font-semibold text-slate-400">02/2026 - 06/2026</span>
+                                </div>
+                                <p class="text-xs font-semibold text-gold-400 mb-3">Công ty TNHH Thương mại và Vận tải Trường Thịnh</p>
+                                
+                                <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Kiểm tra chi tiết bộ giấy tờ phương tiện: Đăng ký xe, kiểm định, bảo hiểm, bằng lái tài xế đảm bảo 100% tuân thủ pháp luật.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Theo dõi sát sao hạn dùng các loại giấy tờ chuyên chở để chủ động nhắc nhở gia hạn đúng hạn.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Tiếp nhận, xử lý thông tin vận đơn hàng hóa từ lái xe và đối tác khách hàng nhanh chóng.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Nhập dữ liệu xuất nhập hàng chính xác lên hệ thống (Tên hàng, số lượng, thời gian, điểm giao nhận).</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Exp Item 3 -->
+                            <div class="searchable-item relative group print-border rounded-2xl bg-navy-950/60 p-5 border border-slate-800 hover:border-gold-500/40 transition-all">
+                                <span class="absolute -left-[25px] sm:-left-[33px] top-6 w-4 h-4 rounded-full bg-slate-600 border-4 border-navy-900"></span>
+                                
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                                    <h3 class="text-base font-bold text-white group-hover:text-gold-400 transition-colors">
+                                        Chuyên viên Chăm sóc Khách hàng (Dự án Viettel)
+                                    </h3>
+                                    <span class="text-xs font-semibold text-slate-400">11/2024 - 02/2025</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <p class="text-xs font-semibold text-gold-400">BellSystem24 Việt Nam - Chi nhánh Đà Nẵng</p>
+                                    <div class="flex gap-1.5">
+                                        <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-bold text-[10px]">SLA 100%</span>
+                                        <span class="px-2 py-0.5 rounded bg-gold-500/20 text-gold-300 font-bold text-[10px]">+15% KPI</span>
+                                    </div>
+                                </div>
+                                
+                                <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Tiếp nhận & giải quyết trên <strong class="text-white">60+ yêu cầu/ngày</strong>, duy trì tỷ lệ cam kết chất lượng dịch vụ (SLA) tuyệt đối <strong class="text-gold-400">100%</strong>.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Tư vấn các gói dịch vụ gia tăng (Isim, nhạc chờ) cho 50+ khách hàng/tháng, <strong class="text-gold-400">vượt 15% chỉ tiêu cá nhân</strong>.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Ghi nhận và cập nhật <strong class="text-white">100% dữ liệu cuộc gọi</strong> lên hệ thống CRM tiêu chuẩn.</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Exp Item 4 -->
+                            <div class="searchable-item relative group print-border rounded-2xl bg-navy-950/60 p-5 border border-slate-800 hover:border-gold-500/40 transition-all">
+                                <span class="absolute -left-[25px] sm:-left-[33px] top-6 w-4 h-4 rounded-full bg-slate-600 border-4 border-navy-900"></span>
+                                
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                                    <h3 class="text-base font-bold text-white group-hover:text-gold-400 transition-colors">
+                                        Chuyên viên Chăm sóc Khách hàng
+                                    </h3>
+                                    <span class="text-xs font-semibold text-slate-400">08/2024 - 11/2024</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <p class="text-xs font-semibold text-gold-400">Công ty Cổ phần Power Membership Card - CN Đà Nẵng</p>
+                                    <div class="flex gap-1.5">
+                                        <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold text-[10px]">FCR 90%</span>
+                                        <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold text-[10px]">CSAT 4.8/5</span>
+                                    </div>
+                                </div>
+                                
+                                <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Phụ trách tiếp nhận <strong class="text-white">70+ cuộc gọi inbound mỗi ngày</strong>, đạt tỷ lệ giải quyết vấn đề ngay lần gọi đầu (FCR) <strong class="text-gold-400">90%</strong>.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Duy trì chỉ số hài lòng khách hàng (CSAT) xuất sắc ở mức <strong class="text-gold-400">4.8 / 5.0 điểm</strong>.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Chủ động báo lỗi kỹ thuật hệ thống, giúp giảm <strong class="text-white">10% thời gian gián đoạn dịch vụ</strong>.</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Exp Item 5 -->
+                            <div class="searchable-item relative group print-border rounded-2xl bg-navy-950/60 p-5 border border-slate-800 hover:border-gold-500/40 transition-all">
+                                <span class="absolute -left-[25px] sm:-left-[33px] top-6 w-4 h-4 rounded-full bg-slate-600 border-4 border-navy-900"></span>
+                                
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                                    <h3 class="text-base font-bold text-white group-hover:text-gold-400 transition-colors">
+                                        Thực tập sinh Quan hệ Khách hàng (MBBank)
+                                    </h3>
+                                    <span class="text-xs font-semibold text-slate-400">12/2023 - 04/2024</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <p class="text-xs font-semibold text-gold-400">Ngân hàng TMCP Quân đội (MB) - Chi nhánh Huế</p>
+                                    <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-bold text-[10px]">80 Tài khoản App/Tháng</span>
+                                </div>
+                                
+                                <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Hỗ trợ thực hiện <strong class="text-white">50 giao dịch/ngày</strong> (tiết kiệm, mở tài khoản, chuyển tiền) với độ chuẩn xác <strong class="text-gold-400">100%</strong>.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Tư vấn cài đặt App MBBank, kích hoạt trung bình <strong class="text-gold-400">80 tài khoản mới/tháng</strong>.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Thiết kế ấn phẩm truyền thông nâng tầm Fanpage chi nhánh, tăng <strong class="text-white">15% tương tác trực tuyến</strong>.</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Exp Item 6 -->
+                            <div class="searchable-item relative group print-border rounded-2xl bg-navy-950/60 p-5 border border-slate-800 hover:border-gold-500/40 transition-all">
+                                <span class="absolute -left-[25px] sm:-left-[33px] top-6 w-4 h-4 rounded-full bg-slate-600 border-4 border-navy-900"></span>
+                                
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                                    <h3 class="text-base font-bold text-white group-hover:text-gold-400 transition-colors">
+                                        Thực tập sinh Kinh doanh
+                                    </h3>
+                                    <span class="text-xs font-semibold text-slate-400">06/2023 - 09/2023</span>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <p class="text-xs font-semibold text-gold-400">Tập đoàn Viễn thông VNPT - Chi nhánh Huế</p>
+                                    <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold text-[10px]">KPI 100%</span>
+                                </div>
+                                
+                                <ul class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Tư vấn dịch vụ viễn thông cho <strong class="text-white">80+ khách hàng/tuần</strong> qua cold calling và tiếp xúc trực tiếp.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-chevron-right text-[10px] text-gold-400 mt-1"></i>
+                                        <span>Duy trì tỷ lệ hài lòng khách hàng đạt <strong class="text-gold-400">95%</strong>, thu thập 70+ lead chất lượng mỗi tháng.</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!-- SECTION 2: EDUCATION & CERTIFICATIONS -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        <!-- Education -->
+                        <section id="sec-education" class="cv-section space-y-4">
+                            <div class="border-b border-slate-800 pb-3">
+                                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-graduation-cap text-gold-400"></i>
+                                    <span>Học Vấn</span>
+                                </h2>
+                            </div>
+
+                            <div class="searchable-item rounded-2xl bg-navy-950/60 p-5 border border-slate-800 relative">
+                                <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-gold-500/20 text-gold-400 border border-gold-500/30">2021 - 2025</span>
+                                <h3 class="text-base font-bold text-white mt-2">Cử nhân Quản Trị Kinh Doanh</h3>
+                                <p class="text-xs font-semibold text-slate-400 mt-0.5">Trường Đại học Kinh tế – Đại học Huế</p>
+                                <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+                                    Trang bị kiến thức hệ thống về Quản trị học, Marketing, Quản trị Nhân sự, Chuỗi cung ứng và Kỹ năng Lãnh đạo Vận hành.
+                                </p>
+                            </div>
+                        </section>
+
+                        <!-- Certificates -->
+                        <section id="sec-certs" class="cv-section space-y-4">
+                            <div class="border-b border-slate-800 pb-3">
+                                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-certificate text-gold-400"></i>
+                                    <span>Chứng Chỉ Chuyên Môn</span>
+                                </h2>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="searchable-item p-3.5 rounded-xl bg-navy-950/60 border border-slate-800 flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-xs font-bold text-white">Giấy chứng nhận tốt nghiệp QTKD</h4>
+                                        <p class="text-[11px] text-slate-400">Trường Đại học Kinh tế Huế</p>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-gold-400 bg-navy-900 px-2 py-1 rounded">2021-2025</span>
+                                </div>
+
+                                <div class="searchable-item p-3.5 rounded-xl bg-navy-950/60 border border-slate-800 flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-xs font-bold text-white">Chứng nhận dự án Hà Mẫn Study Buddy</h4>
+                                        <p class="text-[11px] text-slate-400">Nền tảng học tập trực tuyến</p>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-gold-400 bg-navy-900 px-2 py-1 rounded">2025</span>
+                                </div>
+
+                                <div class="searchable-item p-3.5 rounded-xl bg-navy-950/60 border border-slate-800 flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-xs font-bold text-white">Quản lý năng suất và chất lượng</h4>
+                                        <p class="text-[11px] text-slate-400">Học viện Tài Chính</p>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-gold-400 bg-navy-900 px-2 py-1 rounded">2024</span>
+                                </div>
+
+                                <div class="searchable-item p-3.5 rounded-xl bg-navy-950/60 border border-slate-800 flex items-center justify-between">
+                                    <div>
+                                        <h4 class="text-xs font-bold text-white">Bồi dưỡng kỹ năng số cơ bản</h4>
+                                        <p class="text-[11px] text-slate-400">Cán bộ, viên chức & NLĐ cơ quan nhà nước</p>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-gold-400 bg-navy-900 px-2 py-1 rounded">2026</span>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <!-- SECTION 3: SKILLS & ACHIEVEMENTS -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        <!-- Animated Skills -->
+                        <section id="sec-skills" class="cv-section space-y-4">
+                            <div class="border-b border-slate-800 pb-3">
+                                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-sliders text-gold-400"></i>
+                                    <span>Năng Lực & Kỹ Năng</span>
+                                </h2>
+                            </div>
+
+                            <div class="space-y-4 text-xs">
+                                <div>
+                                    <div class="flex justify-between font-bold mb-1">
+                                        <span class="text-slate-200">Chăm sóc & Hỗ trợ Khách hàng (CX)</span>
+                                        <span class="text-gold-400">95%</span>
+                                    </div>
+                                    <div class="w-full bg-navy-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                                        <div class="bg-gradient-to-r from-gold-600 to-gold-400 h-2 rounded-full" style="width: 95%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between font-bold mb-1">
+                                        <span class="text-slate-200">Giám sát Vận hành & Hành chính</span>
+                                        <span class="text-gold-400">90%</span>
+                                    </div>
+                                    <div class="w-full bg-navy-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                                        <div class="bg-gradient-to-r from-gold-600 to-gold-400 h-2 rounded-full" style="width: 90%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between font-bold mb-1">
+                                        <span class="text-slate-200">Kỹ năng Bán hàng & Cold Calling</span>
+                                        <span class="text-gold-400">88%</span>
+                                    </div>
+                                    <div class="w-full bg-navy-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                                        <div class="bg-gradient-to-r from-gold-600 to-gold-400 h-2 rounded-full" style="width: 88%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="pt-2 flex flex-wrap gap-1.5">
+                                    <span class="px-2.5 py-1 rounded-lg bg-navy-950 border border-slate-800 text-slate-300">Hệ thống CRM</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-navy-950 border border-slate-800 text-slate-300">Xử lý SLA & CSAT</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-navy-950 border border-slate-800 text-slate-300">MBBank App</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-navy-950 border border-slate-800 text-slate-300">Quản lý kho vận</span>
+                                    <span class="px-2.5 py-1 rounded-lg bg-navy-950 border border-slate-800 text-slate-300">MS Office & Văn thư</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Achievements -->
+                        <section id="sec-achievements" class="cv-section space-y-4">
+                            <div class="border-b border-slate-800 pb-3">
+                                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-trophy text-gold-400"></i>
+                                    <span>Danh Hiệu & Giải Thưởng</span>
+                                </h2>
+                            </div>
+
+                            <div class="searchable-item p-5 rounded-2xl bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 border border-gold-500/30 flex items-start gap-4 shadow-lg">
+                                <div class="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/30 text-gold-400 flex items-center justify-center text-xl flex-shrink-0">
+                                    <i class="fa-solid fa-award"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-gold-400">Năm 2023</span>
+                                    <h3 class="text-base font-bold text-white mt-0.5">Giải Khuyến Khích</h3>
+                                    <p class="text-xs text-slate-300 mt-1 font-medium">Cuộc thi Ý tưởng Khởi nghiệp Sáng tạo</p>
+                                    <p class="text-[11px] text-slate-400 mt-2">
+                                        Khẳng định tư duy sáng tạo, khả năng lập kế hoạch kinh doanh và thuyết trình dự án ấn tượng.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                <footer class="bg-navy-950 border-t border-slate-800/80 px-6 py-4 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-2 no-print">
+                    <p>© 2026 Trần Anh Khoa. Executive CV & Professional Portfolio.</p>
+                    <p class="text-gold-400/80 font-medium">Sẵn sàng nhận việc tại Huế & Các tỉnh lân cận</p>
+                </footer>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 no-print">
+        <div class="bg-navy-900 border border-slate-700 rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-6 relative shadow-2xl">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 rounded-2xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mx-auto border border-gold-500/20">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">Liên Hệ TRẦN ANH KHOA</h3>
+                <p class="text-xs text-slate-400">Sao chép thông tin hoặc gọi điện nhanh chóng</p>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <!-- Phone 1 -->
+                <div class="p-3 rounded-xl bg-navy-950 border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <p class="text-slate-400 text-[10px]">Số điện thoại chính</p>
+                        <p class="font-bold text-white text-sm">0899 805 070</p>
+                    </div>
+                    <button onclick="copyText('0899805070', 'Số điện thoại')" class="bg-navy-800 hover:bg-slate-700 text-gold-400 px-3 py-1.5 rounded-lg font-semibold transition-all">
+                        Sao chép
+                    </button>
+                </div>
+
+                <!-- Phone 2 -->
+                <div class="p-3 rounded-xl bg-navy-950 border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <p class="text-slate-400 text-[10px]">Số điện thoại phụ</p>
+                        <p class="font-bold text-white text-sm">0899 997 783</p>
+                    </div>
+                    <button onclick="copyText('0899997783', 'Số điện thoại')" class="bg-navy-800 hover:bg-slate-700 text-gold-400 px-3 py-1.5 rounded-lg font-semibold transition-all">
+                        Sao chép
+                    </button>
+                </div>
+
+                <!-- Email -->
+                <div class="p-3 rounded-xl bg-navy-950 border border-slate-800 flex items-center justify-between">
+                    <div>
+                        <p class="text-slate-400 text-[10px]">Địa chỉ Email</p>
+                        <p class="font-bold text-white text-sm">anhkhoa1509@gmail.com</p>
+                    </div>
+                    <button onclick="copyText('anhkhoa1509@gmail.com', 'Email')" class="bg-navy-800 hover:bg-slate-700 text-gold-400 px-3 py-1.5 rounded-lg font-semibold transition-all">
+                        Sao chép
+                    </button>
+                </div>
+            </div>
+
+            <div class="pt-2 flex gap-2">
+                <a href="tel:0899805070" class="flex-1 bg-gradient-to-r from-gold-500 to-gold-600 text-navy-950 font-bold py-2.5 rounded-xl text-xs text-center transition-all shadow">
+                    <i class="fa-solid fa-phone mr-1"></i> Gọi Ngay
+                </a>
+                <a href="mailto:anhkhoa1509@gmail.com" class="flex-1 bg-navy-800 hover:bg-slate-700 text-white font-semibold py-2.5 rounded-xl text-xs text-center transition-all border border-slate-700">
+                    <i class="fa-solid fa-envelope mr-1"></i> Gửi Mail
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-gold-500 text-navy-950 px-4 py-2.5 rounded-xl font-bold text-xs shadow-xl transition-all duration-300 translate-y-16 opacity-0 pointer-events-none flex items-center gap-2">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toast-msg">Đã sao chép!</span>
+    </div>
+
+    <!-- Main JavaScript Logic -->
+    <script>
+        
+        // View Switcher logic
+        function setViewMode(mode) {
+            const container = document.getElementById('app-container');
+            const island = document.getElementById('dynamic-island');
+            
+            const btnAuto = document.getElementById('btn-view-auto');
+            const btnDesktop = document.getElementById('btn-view-desktop');
+            const btnMobile = document.getElementById('btn-view-mobile');
+
+            // Reset buttons
+            [btnAuto, btnDesktop, btnMobile].forEach(btn => {
+                btn.classList.remove('bg-navy-800', 'text-white', 'shadow');
+                btn.classList.add('text-slate-400');
+            });
+
+            if (mode === 'mobile') {
+                container.className = 'mobile-simulator-container';
+                island.classList.remove('hidden');
+                btnMobile.classList.add('bg-navy-800', 'text-white', 'shadow');
+                btnMobile.classList.remove('text-slate-400');
+            } else if (mode === 'desktop') {
+                container.className = 'desktop-simulator-container';
+                island.classList.add('hidden');
+                btnDesktop.classList.add('bg-navy-800', 'text-white', 'shadow');
+                btnDesktop.classList.remove('text-slate-400');
+            } else {
+                container.className = 'w-full max-w-6xl transition-all duration-300';
+                island.classList.add('hidden');
+                btnAuto.classList.add('bg-navy-800', 'text-white', 'shadow');
+                btnAuto.classList.remove('text-slate-400');
+            }
+        }
+
+        // Section Tabs Filter
+        function filterCategory(cat) {
+            const tabs = ['all', 'experience', 'education', 'skills', 'achievements'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === cat) {
+                    btn.className = 'tab-btn px-3.5 py-2 rounded-xl bg-gold-500 text-navy-950 font-bold transition-all whitespace-nowrap';
+                } else {
+                    btn.className = 'tab-btn px-3.5 py-2 rounded-xl bg-navy-800 text-slate-300 hover:bg-slate-700 transition-all whitespace-nowrap';
+                }
+            });
+
+            const sections = {
+                'experience': document.getElementById('sec-experience'),
+                'education': document.getElementById('sec-education'),
+                'certs': document.getElementById('sec-certs'),
+                'skills': document.getElementById('sec-skills'),
+                'achievements': document.getElementById('sec-achievements'),
+            };
+
+            if (cat === 'all') {
+                Object.values(sections).forEach(s => s.style.display = 'block');
+            } else if (cat === 'experience') {
+                Object.values(sections).forEach(s => s.style.display = 'none');
+                sections.experience.style.display = 'block';
+            } else if (cat === 'education') {
+                Object.values(sections).forEach(s => s.style.display = 'none');
+                sections.education.style.display = 'block';
+                sections.certs.style.display = 'block';
+            } else if (cat === 'skills') {
+                Object.values(sections).forEach(s => s.style.display = 'none');
+                sections.skills.style.display = 'block';
+            } else if (cat === 'achievements') {
+                Object.values(sections).forEach(s => s.style.display = 'none');
+                sections.achievements.style.display = 'block';
+            }
+        }
+
+        // Real-time Search Filter
+        function searchCV() {
+            const query = document.getElementById('cv-search').value.toLowerCase();
+            const items = document.querySelectorAll('.searchable-item');
+
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Contact Modal Logic
+        function openContactModal() {
+            document.getElementById('contact-modal').classList.remove('hidden');
+            document.getElementById('contact-modal').classList.add('flex');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contact-modal').classList.add('hidden');
+            document.getElementById('contact-modal').classList.remove('flex');
+        }
+
+        // Copy Text & Toast
+        function copyText(str, label) {
+            const el = document.createElement('textarea');
+            el.value = str;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            showToast(`Đã sao chép ${label}: ${str}`);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
